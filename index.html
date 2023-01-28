@@ -1,0 +1,168 @@
+<html>
+    <head>
+        <title>lucky draw nandio</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="main.css" type="text/css" />
+        <link type="icon/x-icon" href="favicon.ico" rel="shortcut icon" />
+        <script type="text/javascript" src="Winwheel.min.js"></script>
+        <script src="TweenMax.min.js"></script>
+    </head>
+    <body>
+        <div align="center" id="container">
+            <div class="wrap-lucky-draw">
+                <div class="wrap-lucky-draw-btn">
+                    <button id="spin_start" class="btn wrap-lucky-draw-btn-item wrap-lucky-draw-btn-spin" onClick="startSpin();">QUAY</button> 
+                    <button id="spin_reset" class="btn wrap-lucky-draw-btn-item wrap-lucky-draw-btn-reset" onClick="resetWheel();">THỬ LẠI</button>
+                </div>
+                <div class="the_wheel">
+                    <canvas id="canvas" width="700" height="700">
+                        <!-- <p style="color: white,">Sorry, your browser doesn't support canvas. Please try another.</p> -->
+                    </canvas>
+                </div>
+            </div>
+        </div>
+        <script>
+            //Thông số vòng quay
+            let duration = 20; //Thời gian kết thúc vòng quay
+            let spins    = 3; //Quay nhanh hay chậm 3, 8, 15
+            let theWheel = new Winwheel({
+                // 'numSegments'  : 8,     // Chia 8 phần bằng nhau
+                // 'outerRadius'  : 212,   // Đặt bán kính vòng quay
+                // 'textFontSize' : 12,    // Đặt kích thước chữ
+                // 'rotationAngle': 0,     // Đặt góc vòng quay từ 0 đến 360 độ.
+                // drawMode: "segmentImage", 
+                // imageOverlay: false,
+                // textFillStyle: "white",
+                'numSegments'       : 8,                 // Specify number of segments.
+                'outerRadius'       : 200,               // Set outer radius so wheel fits inside the background.
+                'drawText'          : true,              // Code drawn text can be used with segment images.
+                'textFontSize'      : 12,
+                'textOrientation'   : 'horizontal', //horizontal, vertical, curved
+                'textAlignment'     : 'center', //Set alignment: inner, outer, center.
+                // 'textMargin'        : 15,
+                'strokeStyle'  : 'red' ,
+                // 'textFontFamily'    : 'monospace',
+                // 'textStrokeStyle'   : 'black',
+                'textLineWidth'     : 3,
+                'lineWidth'   : 3,
+                'textFillStyle'     : 'black',
+                // 'drawMode'          : 'segmentImage',   
+                'innerRadius'   : 40,
+                'segments'     :// Các thành phần bao gồm màu sắc và văn bản.
+                [
+                //    { image: "https://res.cloudinary.com/raslasarslas/image/upload/w_50,h_50,c_fill,r_max/w_50,h_310,c_pad/v1535632013/umno4uuugspdufqenx4t.png", 'text' : 'IPHONE 14' },
+                //    { image: "https://res.cloudinary.com/raslasarslas/image/upload/w_50,h_50,c_fill,r_max/w_50,h_310,c_pad/v1535632013/umno4uuugspdufqenx4t.png", 'text' : 'CHÚC BẠN MAY\nMĂN LẦN SAU'},
+                //    { image: "https://res.cloudinary.com/raslasarslas/image/upload/w_50,h_50,c_fill,r_max/w_50,h_310,c_pad/v1535632013/umno4uuugspdufqenx4t.png", 'text' : 'GIẢI NHẤT'},
+                //    { image: "https://res.cloudinary.com/raslasarslas/image/upload/w_50,h_50,c_fill,r_max/w_50,h_310,c_pad/v1535632013/umno4uuugspdufqenx4t.png", 'text' : 'MẤT LƯỢT'},
+                //    { image: "https://res.cloudinary.com/raslasarslas/image/upload/w_50,h_50,c_fill,r_max/w_50,h_310,c_pad/v1535632013/umno4uuugspdufqenx4t.png", 'text' : 'GIẢI NHÌ'},
+                //    { image: "https://res.cloudinary.com/raslasarslas/image/upload/w_50,h_50,c_fill,r_max/w_50,h_310,c_pad/v1535632013/umno4uuugspdufqenx4t.png", 'text' : 'THÊM LƯỢT'},
+                //    { image: "https://res.cloudinary.com/raslasarslas/image/upload/w_50,h_50,c_fill,r_max/w_50,h_310,c_pad/v1535632013/umno4uuugspdufqenx4t.png", 'text' : 'GIẢI BA'},
+                //    { image: "https://res.cloudinary.com/raslasarslas/image/upload/w_50,h_50,c_fill,r_max/w_50,h_310,c_pad/v1535632013/umno4uuugspdufqenx4t.png", 'text' : 'GIẢI KHUYẾN\nKHÍCH'}
+                   { 'fillStyle' : 'white', 'text' : 'IPHONE 14' },
+                   { 'fillStyle' : '#773feb', 'text' : 'CHÚC BẠN MAY\nMĂN LẦN SAU'},
+                   { 'fillStyle' : 'white', 'text' : 'LỌ NƯỚC YẾN \n THIÊN VIỆT\n15% CÓ ĐƯỜNG - 70ML'},
+                   { 'fillStyle' : '#773feb', 'text' : 'MẤT LƯỢT'},
+                   { 'fillStyle' : 'white', 'text' : 'NỒI CHIÊN \nKHÔNG DẦU \n150ML'},
+                   { 'fillStyle' : '#773feb', 'text' : 'THÊM LƯỢT'},
+                   { 'fillStyle' : 'white', 'text' : 'TÚI NƯỚC YẾN \nTRÁI CÂY TRẺ EM\n GENNEST'},
+                   { 'fillStyle' : '#773feb', 'text' : 'GIẢI KHUYẾN\nKHÍCH'}
+                ],
+                'animation' : {
+                    'type'     : 'spinToStop',
+                    'duration' : duration,
+                    'spins'    : spins,
+                    'callbackSound'    : playSound,     //Hàm gọi âm thanh khi quay
+                    'soundTrigger'     : 'pin',         //Chỉ định chân là để kích hoạt âm thanh
+                    'callbackFinished' : alertPrize,    //Hàm hiển thị kết quả trúng giải thưởng
+                },
+                'pins' :
+                {
+                    'number' : 32   //Số lượng chân. Chia đều xung quanh vòng quay.
+                }
+            });
+            
+            //Kiểm tra vòng quay
+            let wheelSpinning = false;
+            
+            //Tạo âm thanh và tải tập tin tick.mp3.
+            let audio = new Audio('tick1.mp3');
+            function playSound() {
+                audio.pause();
+                // audio.currentTime = 0;
+                audio.play();
+                // audio.pause();
+            }
+            
+            //Hiển thị các nút vòng quay
+            function statusButton(status) {
+                if ( status==1 ) { //trước khi quay
+                    document.getElementById('spin_start').removeAttribute("disabled");
+                    document.getElementById('spin_start').classList.remove("hide");
+                    document.getElementById('spin_reset').classList.add("hide");
+                } else if ( status==2 ) { //đang quay
+                    document.getElementById('spin_start').setAttribute("disabled", false);
+                    document.getElementById('spin_reset').classList.add("hide");
+                } else if ( status==3 ) { //kết quả
+                    document.getElementById('spin_reset').classList.remove("hide");
+                } else {
+                    alert('Các giá trị của status: 1, 2, 3');
+                }
+            }
+            statusButton(1);
+
+            //stopAngle
+            function stopAngle() {
+                //Ta có: 360 độ chia 8 bằng 45 độ cho mỗi giải thưởng.
+                //VD: Giải 3 => Có gốc độ từ 91 đến 135.
+                // let arrayStart = [46, 136, 181, 271]
+                Array.prototype.random = function () {
+                    return this[Math.floor((Math.random()*this.length))];
+                }
+                let start = [46, 136, 226, 316].random();
+                let stop = Math.floor((Math.random() * 43)); //Giá trị cao nhất 44
+                let stopAt = start + stop;
+                console.log({ stopAt })
+                theWheel.animation.stopAngle = stopAt;
+            }
+            
+            //startSpin
+            function startSpin() {
+                
+                // Ensure that spinning can't be clicked again while already running.
+                if (wheelSpinning == false) {
+                    //CSS hiển thị button
+                    statusButton(2);
+
+                    //Kết qủa chỉ định
+                    stopAngle();
+
+                    //Hàm bắt đầu quay
+                    theWheel.startAnimation();
+                   
+                    //Khóa vòng quay
+                    wheelSpinning = true;
+                }
+            }
+            
+            //Result
+            function alertPrize(indicatedSegment) {
+                alert("Chúc mừng bạn trúng: " + indicatedSegment.text);
+                document.getElementById('spin_start').classList.add("hide");
+                //CSS hiển thị button
+                statusButton(3);
+            }
+
+            //resetWheel
+            function resetWheel() {
+                //CSS hiển thị button   
+                statusButton(1);
+                
+                theWheel.stopAnimation(false);  // Stop the animation, false as param so does not call callback function.
+                theWheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.
+                theWheel.draw();                // Call draw to render changes to the wheel.
+
+                wheelSpinning = false;          // Reset to false to power buttons and spin can be clicked again.
+            }
+        </script>
+    </body>
+</html>
