@@ -1,11 +1,14 @@
 <html>
     <head>
         <title>lucky draw nandio</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> -->
+        <meta name="viewport" content="width=device-width, user-scalable=no" />
+        <!-- <meta name="viewport" content="width=device-width, user-scalable=no" /> -->
         <link rel="stylesheet" href="main.css" type="text/css" />
         <link type="icon/x-icon" href="favicon.ico" rel="shortcut icon" />
         <script type="text/javascript" src="Winwheel.min.js"></script>
-        <script src="TweenMax.min.js"></script>
+        <!-- <script src="TweenMax.min.js"></script> -->
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
     </head>
     <body>
         <div align="center" id="container">
@@ -15,7 +18,10 @@
                     <button id="spin_reset" class="btn wrap-lucky-draw-btn-item wrap-lucky-draw-btn-reset" onClick="resetWheel();">THỬ LẠI</button>
                 </div>
                 <div class="the_wheel">
-                    <canvas id="canvas" width="700" height="700">
+                    <canvas id="canvas" width="440" height="700" 
+                    data-responsiveMinWidth="440"
+                    data-responsiveScaleHeight="true"
+                    data-responsiveMargin="10"> 
                         <!-- <p style="color: white,">Sorry, your browser doesn't support canvas. Please try another.</p> -->
                     </canvas>
                 </div>
@@ -24,7 +30,7 @@
         <script>
             //Thông số vòng quay
             let duration = 20; //Thời gian kết thúc vòng quay
-            let spins    = 3; //Quay nhanh hay chậm 3, 8, 15
+            let spins    = 8; //Quay nhanh hay chậm 3, 8, 15
             let theWheel = new Winwheel({
                 // 'numSegments'  : 8,     // Chia 8 phần bằng nhau
                 // 'outerRadius'  : 212,   // Đặt bán kính vòng quay
@@ -34,38 +40,39 @@
                 // imageOverlay: false,
                 // textFillStyle: "white",
                 'numSegments'       : 8,                 // Specify number of segments.
-                'outerRadius'       : 200,               // Set outer radius so wheel fits inside the background.
+                // 'outerRadius'       : 213,               // Set outer radius so wheel fits inside the background.
                 'drawText'          : true,              // Code drawn text can be used with segment images.
-                'textFontSize'      : 12,
-                'textOrientation'   : 'horizontal', //horizontal, vertical, curved
-                'textAlignment'     : 'center', //Set alignment: inner, outer, center.
-                // 'textMargin'        : 15,
-                'strokeStyle'  : 'red' ,
+                'textFontSize' : 16,    // Set font size as desired.
+                'textOrientation'   : 'curved', //horizontal, vertical, curved
+                'textAlignment'     : 'outer', //Set alignment: inner, outer, center.
+                'textMargin'        : 25,
+                'strokeStyle'  : 'white' ,
+                'responsive'   : true,
                 // 'textFontFamily'    : 'monospace',
                 // 'textStrokeStyle'   : 'black',
                 'textLineWidth'     : 3,
                 'lineWidth'   : 3,
                 'textFillStyle'     : 'black',
-                // 'drawMode'          : 'segmentImage',   
+                'drawMode'          : 'segmentImage',   
                 'innerRadius'   : 40,
                 'segments'     :// Các thành phần bao gồm màu sắc và văn bản.
                 [
-                //    { image: "https://res.cloudinary.com/raslasarslas/image/upload/w_50,h_50,c_fill,r_max/w_50,h_310,c_pad/v1535632013/umno4uuugspdufqenx4t.png", 'text' : 'IPHONE 14' },
-                //    { image: "https://res.cloudinary.com/raslasarslas/image/upload/w_50,h_50,c_fill,r_max/w_50,h_310,c_pad/v1535632013/umno4uuugspdufqenx4t.png", 'text' : 'CHÚC BẠN MAY\nMĂN LẦN SAU'},
-                //    { image: "https://res.cloudinary.com/raslasarslas/image/upload/w_50,h_50,c_fill,r_max/w_50,h_310,c_pad/v1535632013/umno4uuugspdufqenx4t.png", 'text' : 'GIẢI NHẤT'},
-                //    { image: "https://res.cloudinary.com/raslasarslas/image/upload/w_50,h_50,c_fill,r_max/w_50,h_310,c_pad/v1535632013/umno4uuugspdufqenx4t.png", 'text' : 'MẤT LƯỢT'},
-                //    { image: "https://res.cloudinary.com/raslasarslas/image/upload/w_50,h_50,c_fill,r_max/w_50,h_310,c_pad/v1535632013/umno4uuugspdufqenx4t.png", 'text' : 'GIẢI NHÌ'},
-                //    { image: "https://res.cloudinary.com/raslasarslas/image/upload/w_50,h_50,c_fill,r_max/w_50,h_310,c_pad/v1535632013/umno4uuugspdufqenx4t.png", 'text' : 'THÊM LƯỢT'},
-                //    { image: "https://res.cloudinary.com/raslasarslas/image/upload/w_50,h_50,c_fill,r_max/w_50,h_310,c_pad/v1535632013/umno4uuugspdufqenx4t.png", 'text' : 'GIẢI BA'},
-                //    { image: "https://res.cloudinary.com/raslasarslas/image/upload/w_50,h_50,c_fill,r_max/w_50,h_310,c_pad/v1535632013/umno4uuugspdufqenx4t.png", 'text' : 'GIẢI KHUYẾN\nKHÍCH'}
-                   { 'fillStyle' : 'white', 'text' : 'IPHONE 14' },
-                   { 'fillStyle' : '#773feb', 'text' : 'CHÚC BẠN MAY\nMĂN LẦN SAU'},
-                   { 'fillStyle' : 'white', 'text' : 'LỌ NƯỚC YẾN \n THIÊN VIỆT\n15% CÓ ĐƯỜNG - 70ML'},
-                   { 'fillStyle' : '#773feb', 'text' : 'MẤT LƯỢT'},
-                   { 'fillStyle' : 'white', 'text' : 'NỒI CHIÊN \nKHÔNG DẦU \n150ML'},
-                   { 'fillStyle' : '#773feb', 'text' : 'THÊM LƯỢT'},
-                   { 'fillStyle' : 'white', 'text' : 'TÚI NƯỚC YẾN \nTRÁI CÂY TRẺ EM\n GENNEST'},
-                   { 'fillStyle' : '#773feb', 'text' : 'GIẢI KHUYẾN\nKHÍCH'}
+                   { image: "tom.png", 'text' : 'IPHONE 14',},
+                   { image: "tom.png", 'text' : 'CHÚC BẠN MAY\nMĂN LẦN SAU'},
+                   { image: "tom.png", 'text' : 'GIẢI NHẤT'},
+                   { image: "tom.png", 'text' : 'MẤT LƯỢT'},
+                   { image: "tom.png", 'text' : 'GIẢI NHÌ'},
+                   { image: "tom.png", 'text' : 'THÊM LƯỢT'},
+                   { image: "tom.png", 'text' : 'GIẢI BA'},
+                   { image: "tom.png", 'text' : 'GIẢI KHUYẾN\nKHÍCH'}
+                //    { 'fillStyle' : 'white', 'text' : 'IPHONE 14' },
+                //    { 'fillStyle' : '#773feb', 'text' : 'CHÚC BẠN MAY\nMĂN LẦN SAU'},
+                //    { 'fillStyle' : 'white', 'text' : 'LỌ NƯỚC YẾN \n THIÊN VIỆT\n15% CÓ ĐƯỜNG - 70ML'},
+                //    { 'fillStyle' : '#773feb', 'text' : 'MẤT LƯỢT'},
+                //    { 'fillStyle' : 'white', 'text' : 'NỒI CHIÊN \nKHÔNG DẦU \n150ML'},
+                //    { 'fillStyle' : '#773feb', 'text' : 'THÊM LƯỢT'},
+                //    { 'fillStyle' : 'white', 'text' : 'TÚI NƯỚC YẾN \nTRÁI CÂY TRẺ EM\n GENNEST'},
+                //    { 'fillStyle' : '#773feb', 'text' : 'GIẢI KHUYẾN\nKHÍCH'}
                 ],
                 'animation' : {
                     'type'     : 'spinToStop',
@@ -77,7 +84,13 @@
                 },
                 'pins' :
                 {
-                    'number' : 32   //Số lượng chân. Chia đều xung quanh vòng quay.
+                    'number' : 32,   //Số lượng chân. Chia đều xung quanh vòng quay.
+                    'outerRadius' : 5,
+                    'responsive' : true,
+                    'margin'      : 0,
+                    // 'fillStyle'   : '#FFFF66',
+                    'fillStyle'   : '#FFFF66',
+                    'strokeStyle' : 'rgb(255, 165, 0)'
                 }
             });
             

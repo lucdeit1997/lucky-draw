@@ -24,13 +24,14 @@ body
     background-image: url(./wheel_back.png);
     background-repeat: no-repeat;
     background-position: center;
+    background-size: contain;
     /* background-repeat: no-repeat;
     background-size: cover;
     position: relative; */
 }
 
 #container {
-    background-image: url("https://i.pinimg.com/originals/76/a8/ea/76a8ea33d8fbc7ed64732b66528b027b.png");
+    background-image: url("https://cdn1.hoanghamobile.com/tin-tuc/wp-content/uploads/2019/12/bts2-1.jpg");
     background-color: #cccccc;
     height: 100%;
     width:100%; 
@@ -107,13 +108,15 @@ td.pw3
 
 .wrap-lucky-draw {
     position: relative;
-    width: 700px;
+    width: 450px;
+    /* padding-top: 10%; */
 }
+
 
 .wrap-lucky-draw-btn {
     position: absolute;
-    top: 310px;
-    left: 310px;
+    top: 44%;
+    left: 41%;
 }
 
 .wrap-lucky-draw-btn-item {
@@ -125,3 +128,19 @@ td.pw3
     font-weight: bold;
 }
 
+@media only screen and (min-width: 200px) and (max-width: 767px)  {
+    .wrap-lucky-draw {
+        position: relative;
+        /* width: 700px; */
+        width: 100%;
+        padding-top: 30%;
+    }
+    .wrap-lucky-draw-btn {
+        position: absolute;
+        top: 53%;
+        left: 40%;
+    }
+    #canvas {
+        width: 380;
+    }
+}
